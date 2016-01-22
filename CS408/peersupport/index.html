@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!-- https://devweb2015.cis.strath.ac.uk/~rnb12162/CS408/peersupport/index.html -->
+
+<!-- https://devweb2014.cis.strath.ac.uk/~jwb09185/317/prac3/main.html -->
+<html>
+    <head>
+        <title>Supporting Peer Support</title>
+        <meta charset="UTF-8">
+        <link type="text/css" rel="stylesheet" href="SPSStylesheet.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, 
+              maximum-scale=1.0, user-scalable=no">
+        <meta name="mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <link rel="icon" sizes="192x192" href="bigAppIcon.png" />
+        <link rel="apple-touch-icon" href="bigAppIcon.png" />
+        <link rel="shortcut icon" href="smallAppIcon.png" type="image/x-icon" />
+
+    </head>
+    <body>
+        <div class ="home">
+            <a href="index.html" class="homeBtn">Home</a>
+        </div>
+        <div class="toolbar">
+        <a href="forum.html" class="btn">Forum</a>
+        <a href="chat.php" class="btn">Chat</a>
+        <a href="help.html" class="btn">Help</a>
+        </div>
+        <div class ="register">
+            <a href="register.html" class="btn">Register to help</a>
+        </div>
+        <section id="mainsection" class="mainsection">
+         <!--   <input type="text" name ="display" size="16" id="input" readonly><br> -->
+         <br>
+         <br>
+         Welcome.
+                        <div id="signIn">
+                            <a href="helperLogin.php" class="helperSignIn">Give Help</a>
+                            <a href="getHelpLogin.php" class="getHelpSignIn">Get Help</a>
+                            <br>
+                        </div>
+        </section>
+<!--<section id="login">-->
+<!--<p>Welcome: <?php if(isset($login_session)) { echo $_SESSION['login_user']; }
+else { echo "not logged in"; } ?></p>
+<table>
+  <tr>
+  <?php
+      mysql_connect("devweb2014.cis.strath.ac.uk", "prb12147", "sconormu");
+
+	// Select your database
+      mysql_select_db("prb12147") or die(mysql_error());
+      
+      $result = mysql_query("SELECT * FROM products")
+      or die(mysql_error()); 
+
+      while($row = mysql_fetch_array($result, MYSQL_NUM)){
+	$file = $row[1];
+	echo "<a href='product.php?id=$row[0]'> <img src='$file'/><br/>";
+	echo "$row[2]<br/>";
+	echo "$row[4]<br/><br/>";
+    }
+?>
+  </tr>
+</table>
+</section>-->
+        <footer>&copy; 2015 Andrew Mortimer</footer>
+        <script src="SPSModel.js"></script>
+        <script src="SPSView.js"></script>
+        <script src="SPSController.js"></script>
+    </body>
+</html>
