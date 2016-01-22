@@ -9,7 +9,7 @@
         <div class="toolbar">
         <a href="forum.html" class="btn">Forum</a>
         <a href="chat.php" class="btn">Chat</a>
-        <a href="help.html" class="btn">Help</a>
+        <a href="about.html" class="btn">Help</a>
         </div>
         <div class ="register">
             <a href="register.html" class="btn">Register to help</a>
