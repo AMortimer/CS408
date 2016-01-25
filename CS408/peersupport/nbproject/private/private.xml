@@ -3,18 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Q:/2015/CS408/peersupport/SPSController.js</file>
-            <file>file:/Q:/2015/CS408/peersupport/registered.php</file>
-            <file>file:/Q:/2015/CS408/peersupport/getHelpLogin.php</file>
-            <file>file:/Q:/2015/CS408/peersupport/SPSModel.js</file>
-            <file>file:/Q:/2015/CS408/peersupport/help.html</file>
-            <file>file:/Q:/2015/CS408/peersupport/forum.html</file>
             <file>file:/Q:/2015/CS408/peersupport/register.html</file>
-            <file>file:/Q:/2015/CS408/peersupport/chat.php</file>
-            <file>file:/Q:/2015/CS408/peersupport/addChat.php</file>
             <file>file:/Q:/2015/CS408/peersupport/helperLogin.php</file>
+            <file>file:/Q:/2015/CS408/peersupport/about.html</file>
             <file>file:/Q:/2015/CS408/peersupport/index.html</file>
             <file>file:/Q:/2015/CS408/peersupport/SPSView.js</file>
+            <file>file:/Q:/2015/CS408/peersupport/chat.html</file>
+            <file>file:/Q:/2015/CS408/peersupport/registered.php</file>
+            <file>file:/Q:/2015/CS408/peersupport/getHelpLogin.php</file>
+            <file>file:/Q:/2015/CS408/peersupport/forum.html</file>
+            <file>file:/Q:/2015/CS408/peersupport/chat.php</file>
+            <file>file:/Q:/2015/CS408/peersupport/addChat.php</file>
+            <file>file:/Q:/2015/CS408/peersupport/addPost.php</file>
+            <file>file:/Q:/2015/CS408/peersupport/getPost.php</file>
         </group>
     </open-files>
 </project-private>

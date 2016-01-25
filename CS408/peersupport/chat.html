@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <title>Chat</title>
+    </head>
+    <body onload="refresh()">
+        <div class ="home">
+            <a href="index.html" class="homeBtn">Home</a>
+        </div>
+        <div class="toolbar">
+        <a href="forum.html" class="btn">Forum</a>
+        <a href="chat.html" class="btn">Chat</a>
+        <a href="about.html" class="btn">Help</a>
+        </div>
+        <div class ="register">
+            <a href="register.html" class="btn">Register to help</a>
+        </div>
+        <main>
+            <div id="chatHolder">
+                <table id="entries">
+                </table>       
+            </div>
+            <div id="addEntry">
+                <form class="entryForm" action="addChat.php" onsubmit="return checkEntry()" method="POST">
+                    <table>
+                        <tr>
+                            <td><strong>Message:</strong></td>
+                            <td><textarea id="entry" name="comment" row="10" cols="28"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td><input class="fButton" type="submit" value="Submit"></td>
+                            <td><input class="fButton" type="reset" value="Reset"></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </main>
+
+        <script>
+            function refresh () {
+		setInterval(function viewEntries() {
+                    var xmlhttp;
+                    
+		if (window.XMLHttpRequest){
+		// for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+		} else { // for IE6, IE5
+				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		    }
+			 xmlhttp.onreadystatechange=function() {
+			 if (xmlhttp.readyState===4 && xmlhttp.status===200) {
+				document.getElementById("entries").innerHTML=xmlhttp.responseText;
+			    }	
+			}
+			xmlhttp.open("GET","chat.php?",true);
+			xmlhttp.send();
+		}, 100);
+            }
+                
+                function checkEntry(){
+		var entry   = document.getElementById("entry");
+		
+		if(entry.value === "") {
+			alert("Dont leave text field empty");
+			return false;
+		}
+		
+		}
+       </script>
+    </body>
+</html>
+
+

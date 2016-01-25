@@ -1,3 +1,28 @@
+<html>
+    <head>
+        <title>Login</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class ="home">
+            <a href="index.html" class="homeBtn">Home</a>
+        </div>
+        <div class="toolbar">
+        <a href="forum.html" class="btn">Forum</a>
+        <a href="chat.html" class="btn">Chat</a>
+        <a href="about.html" class="btn">Help</a>
+        </div>	
+        <h2>Login Form</h2>
+	<form action="" method="post" id="loginForm">
+	  <label>Email:</label>
+	  <input id="name" name="username" placeholder="username" type="text">
+	  <label>Password :</label>
+	  <input id="password" name="password" placeholder="******" type="password">
+	  <input name="submit" type="submit" value=" Login ">
+	  <span><?php echo $error; ?></span>
+	</form>
+
 <?php
 session_start(); // Starting Session
 $error=''; // Variable To Store Error Message
@@ -32,4 +57,6 @@ if (isset($_POST['submit'])) {
   }
 }
 ?>
+    </body>
+</html>
 

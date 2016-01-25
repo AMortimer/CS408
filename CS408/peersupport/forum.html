@@ -10,13 +10,14 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body>
+    <body onload='viewEntries()'>
+        
         <div class ="home">
             <a href="index.html" class="homeBtn">Home</a>
         </div>
         <div class="toolbar">
         <a href="forum.html" class="btn">Forum</a>
-        <a href="chat.php" class="btn">Chat</a>
+        <a href="chat.html" class="btn">Chat</a>
         <a href="about.html" class="btn">Help</a>
         </div>
         <div class ="register">
@@ -40,6 +41,10 @@ and open the template in the editor.
                     </table>
                 </form>
             </div>
+            <div id="allEntries">
+                <table id="forum">
+                </table>       
+            </div>
         <script>
             	function checkEntry(){
 		var title = document.getElementById("title");
@@ -51,5 +56,24 @@ and open the template in the editor.
 		}
 		}
         </script>
+                <script>
+		function viewEntries() {
+                    var xmlhttp;
+                    
+		if (window.XMLHttpRequest){
+		// for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+		} else { // for IE6, IE5
+				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		    }
+			 xmlhttp.onreadystatechange=function() {
+			 if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				document.getElementById("forum").innerHTML=xmlhttp.responseText;
+			    }	
+			}
+			xmlhttp.open("GET","getPost.php?",true);
+			xmlhttp.send();
+		}
+       </script>
     </body>
 </html>

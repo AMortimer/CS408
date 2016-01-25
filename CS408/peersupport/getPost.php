@@ -5,24 +5,25 @@
 
       mysql_select_db("rnb12162") or die(mysql_error());
 
-     $query = "SELECT * FROM SupportChat 
-	       ORDER BY date DESC
-               LIMIT 30";
+     $query = "SELECT * FROM forum 
+	       ORDER BY date
+	       DESC";
 	       
       $result = mysql_query($query) or die(mysql_error());
 
   if(mysql_num_rows($result) > 0) {
-	  	echo "<table id='entries'><tr><th>Date</th><th>Message</th>";
+	  	echo "<table id='forum'><tr><th>Date</th><th>Title</th><th>Entry</th>";
 
         while($row = mysql_fetch_array($result)){
 			echo "<tr>";
 			echo "<td>" . $row['date']  . "</td>";
-			echo "<td>" . $row['comment']	 . "</td>";
+			echo "<td>" . $row['title'] . "</td>";
+			echo "<td>" . $row['body']	 . "</td>";
 			echo "</tr>";
 		}
 		echo "</table>";
 	  
 	} else {
-			echo "No one is chatting";
+			echo "No entries";
 	}
 ?>
