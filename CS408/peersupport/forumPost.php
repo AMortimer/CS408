@@ -1,4 +1,4 @@
-<!--<html>
+<html>
     <head>
         <title>Forum</title>
         <meta charset="UTF-8">
@@ -20,7 +20,7 @@
         <div id="allEntries">
             <table id="forum">
             </table>       
-        </div> -->
+        </div>
 
 <?php
 //create an html file and redirect to it 
@@ -30,7 +30,7 @@ $sHTML_Header = "<html><head><title>Test an html page</title></head><body>";
 $sHTML_Content = "<h2><center>This is a Test Page</center><h2><br /><hr />"; 
 $sHTML_Footer =  "</body></html>"; 
 
-$filename = "test.html"; 
+$filename = "forumPost.html"; 
 
 // Let's make sure the file exists and is writable first. 
 if (is_writable($filename)) { 
@@ -61,12 +61,8 @@ if (is_writable($filename)) {
 
 //redirect the user to the html page 
 header("location:$filename"); 
-?>
-
-?>
-    
-    
-<!--    </body>
-</html>-->
+?>    
+    </body>
+</html>
 
 
