@@ -8,7 +8,7 @@
     // for the name emailAddress keys
 
     // IF values set
- //   if ($_POST['password'] > 6) {
+    if ($_POST['password'] > 6) {
         if($_POST['password'] == $_POST['confirm']){
             if(!empty($_POST['firstname']) && !empty($_POST['surname']) && !empty($_POST['email']) && !empty($_POST['course']) 
               && !empty($_POST['year'])){
@@ -27,7 +27,8 @@
                 // Redirect to index.html
                 header("Location: https://devweb2015.cis.strath.ac.uk/~rnb12162/CS408/peersupport/index.html");
               }
-   //     }
+        }
+    }
       // ELSE values not set 
             else {
                 echo "Form not filled in correctly! <br/>";
@@ -35,14 +36,14 @@
                 echo "<a href=https://devweb2015.cis.strath.ac.uk/~rnb12162/CS408/peersupport/register.html> Click here to register again</a>";
                   // provide a link back to addEntry.html
             }
-    }
+    
         else {
             echo "Password does not match confirmation. Please try again.<br/>";
             echo "<a href=https://devweb2015.cis.strath.ac.uk/~rnb12162/CS408/peersupport/register.html> Click here to register again</a>";
         }
- //   else {
-//        echo "Password must be a minimum of 6 characters";+
- //   }
+    else {
+        echo "Password must be a minimum of 6 characters";+
+    }
     
 ?>
 </body>
