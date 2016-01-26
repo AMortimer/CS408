@@ -12,13 +12,13 @@
       $result = mysql_query($query) or die(mysql_error());
 
   if(mysql_num_rows($result) > 0) {
-	  	echo "<table id='forum'><tr><th>Date</th><th>Title</th><th>Entry</th>";
+	  	echo "<table id='forum'><tr><th>Date</th><th>Title</th>";
 
         while($row = mysql_fetch_array($result)){
 			echo "<tr>";
 			echo "<td>" . $row['date']  . "</td>";
-			echo "<td>" . $row['title'] . "</td>";
-			echo "<td>" . $row['body']	 . "</td>";
+			echo "<td>" . '<a href="forumPost.php">'.$row['title'] .'</a>'. "</td>";
+			//echo "<td>" . $row['body']	 . "</td>";
 			echo "</tr>";
 		}
 		echo "</table>";

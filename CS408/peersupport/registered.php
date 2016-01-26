@@ -27,22 +27,23 @@
                 // Redirect to index.html
                 header("Location: https://devweb2015.cis.strath.ac.uk/~rnb12162/CS408/peersupport/index.html");
               }
+                    else {
+                        echo "Form not filled in correctly! <br/>";
+                        print_r ($_POST);
+                        echo "<a href=https://devweb2015.cis.strath.ac.uk/~rnb12162/CS408/peersupport/register.html> Click here to register again</a>";
+                          // provide a link back to addEntry.html
+                    }
         }
+            else {
+                echo "Password does not match confirmation. Please try again.<br/>";
+                echo "<a href=https://devweb2015.cis.strath.ac.uk/~rnb12162/CS408/peersupport/register.html> Click here to register again</a>";
+            }
     }
       // ELSE values not set 
-            else {
-                echo "Form not filled in correctly! <br/>";
-                print_r ($_POST);
-                echo "<a href=https://devweb2015.cis.strath.ac.uk/~rnb12162/CS408/peersupport/register.html> Click here to register again</a>";
-                  // provide a link back to addEntry.html
-            }
-    
-        else {
-            echo "Password does not match confirmation. Please try again.<br/>";
-            echo "<a href=https://devweb2015.cis.strath.ac.uk/~rnb12162/CS408/peersupport/register.html> Click here to register again</a>";
-        }
+
     else {
-        echo "Password must be a minimum of 6 characters";+
+        echo "Password must be a minimum of 6 characters";
+        echo "<a href=https://devweb2015.cis.strath.ac.uk/~rnb12162/CS408/peersupport/register.html> Click here to register again</a>";
     }
     
 ?>
