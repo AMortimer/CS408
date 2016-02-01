@@ -7,7 +7,7 @@
     <body>
         
         <div class ="home">
-            <a href="index.html" class="homeBtn">Home</a>
+            <a href="home.php" class="homeBtn">Home</a>
         </div>
         <div class="toolbar">
         <a href="forum.html" class="btn">Forum</a>
@@ -26,7 +26,7 @@
 //create an html file and redirect to it 
 
 //set some basic html content 
-$sHTML_Header = "<html><head><title>Test an html page</title></head><body>"; 
+$sHTML_Header = "<html><head><title>Forum Post</title></head><body>"; 
 $sHTML_Content = "<h2><center>This is a Test Page</center><h2><br /><hr />"; 
 $sHTML_Footer =  "</body></html>"; 
 

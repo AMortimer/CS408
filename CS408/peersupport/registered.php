@@ -8,7 +8,7 @@
     // for the name emailAddress keys
 
     // IF values set
-    if ($_POST['password'] > 6) {
+    if ($_POST['password'] >= 6) {
         if($_POST['password'] == $_POST['confirm']){
             if(!empty($_POST['firstname']) && !empty($_POST['surname']) && !empty($_POST['email']) && !empty($_POST['course']) 
               && !empty($_POST['year'])){
@@ -25,7 +25,7 @@
                 // Execute the query
 
                 // Redirect to index.html
-                header("Location: https://devweb2015.cis.strath.ac.uk/~rnb12162/CS408/peersupport/index.html");
+                header("Location: https://devweb2015.cis.strath.ac.uk/~rnb12162/CS408/peersupport/home.html");
               }
                     else {
                         echo "Form not filled in correctly! <br/>";
