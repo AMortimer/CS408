@@ -8,10 +8,10 @@
     // for the name emailAddress keys
 
     // IF values set
-    if ($_POST['password'] >= 6) {
+    if (strlen($_POST['password']) >= 6) {
         if($_POST['password'] == $_POST['confirm']){
-            if(!empty($_POST['firstname']) && !empty($_POST['surname']) && !empty($_POST['email']) && !empty($_POST['course']) 
-              && !empty($_POST['year'])){
+            if(!empty($_POST['username']) && !empty($_POST['name'])) { //&& !empty($_POST['email']) && !empty($_POST['course']) 
+             // && !empty($_POST['year'])){
                 // Connect to database server
                 mysql_connect("devweb2014.cis.strath.ac.uk", "rnb12162", "consista");
 
@@ -20,7 +20,7 @@
 
                 // Build an SQL query to add the new entry into the helpers table
                 mysql_query("INSERT INTO helpers
-                (firstname, surname, email, course, year, password) VALUES('$_POST[firstname]', '$_POST[surname]', '$_POST[email]', '$_POST[course]', '$_POST[year]', '$_POST[password]' )")
+                (username, name, password) VALUES('$_POST[username]', '$_POST[name]', '$_POST[password]' )")
                 or die(mysql_error());  
                 // Execute the query
 

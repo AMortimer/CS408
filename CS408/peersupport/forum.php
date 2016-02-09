@@ -11,8 +11,8 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script>
             $(document).ready(function(){
-              $('#login-trigger').click(function(){
-                $(this).next('#login-content').slideToggle();
+              $('#forum-trigger').click(function(){
+                $(this).next('#forums-content').slideToggle();
                 $(this).toggleClass('active');          
 
                 if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;')
@@ -27,7 +27,7 @@ and open the template in the editor.
             <a href="home.php" class="homeBtn">Home</a>
         </div>
         <div class="toolbar">
-        <a href="forum.html" class="btn">Forum</a>
+        <a href="forum.php" class="btn">Forum</a>
         <a href="chat.html" class="btn">Chat</a>
         <a href="about.html" class="btn">Help</a>
         </div>
@@ -39,22 +39,7 @@ and open the template in the editor.
             Add new forum
         </a>
         <div id="login-content">
-            <h2>Login Form</h2>
-            <form action="" method="post" id="loginForm">
-                <fieldset id="inputs">
-                    <label>Username:</label>
-                    <input id="name" name="username" placeholder="username" type="text">
-                    <label>Password :</label>
-                    <input id="password" name="password" placeholder="******" type="password">
-                </fieldset>
-                <fieldset id="actions">
-                    <input name="submit" type="submit" value=" Login ">
-                </fieldset>
               <span><?php echo $error; ?></span>
-            </form>
-        </div>
-        </li>
-        <div id="addEntry">
                 <form class="entryForm" action="addPost.php" onsubmit="return checkEntry()" method="POST">
                     <table>
                         <tr>
@@ -76,6 +61,10 @@ and open the template in the editor.
                         </tr>
                     </table>
                 </form>
+        </div>
+        </li>
+        <div id="addEntry">
+
             </div>
             <div id="allEntries">
                 <table id="forum">

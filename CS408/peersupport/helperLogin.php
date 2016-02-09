@@ -21,7 +21,7 @@
             <a href="home.php" class="homeBtn">Home</a>
         </div>
         <div class="toolbar">
-        <a href="forum.html" class="btn">Forum</a>
+        <a href="forum.php" class="btn">Forum</a>
         <a href="chat.html" class="btn">Chat</a>
         <a href="about.html" class="btn">Help</a>
         </div>
@@ -33,7 +33,7 @@
             <h2>Login Form</h2>
             <form action="" method="post" id="loginForm">
                 <fieldset id="inputs">
-                    <label>Email:</label>
+                    <label>Username:</label>
                     <input id="name" name="username" placeholder="username" type="text">
                     <label>Password :</label>
                     <input id="password" name="password" placeholder="******" type="password">
