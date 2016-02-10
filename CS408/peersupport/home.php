@@ -1,3 +1,7 @@
+<?php
+// Start the session
+session_start();
+?>
 <!DOCTYPE html>
 <!-- https://devweb2015.cis.strath.ac.uk/~rnb12162/CS408/peersupport/home.html -->
 
@@ -32,7 +36,7 @@
             <a href="home.php" class="homeBtn">Home</a>
         </div>
         <div class="toolbar">
-        <a href="forum.html" class="btn">Forum</a>
+        <a href="forum.php" class="btn">Forum</a>
         <a href="chat.html" class="btn">Chat</a>
         <a href="about.html" class="btn">Help</a>
         </div>
@@ -47,21 +51,21 @@
          <div id="signIn">
     <li id="login">
         <a id="login-trigger" href='#'>
-            Sign in <span>▼</span>
+            Sign in <span></span>
         </a>
         <div id="login-content">
             <h2>Login Form</h2>
             <form action="" method="post" id="loginForm">
                 <fieldset id="inputs">
-                    <label>Email:</label>
+                    <label>Username:</label>
                     <input id="name" name="username" placeholder="username" type="text" required>
                     <label>Password :</label>
                     <input id="password" name="password" placeholder="******" type="password" required>
                 </fieldset>
                 <fieldset id="actions">
-                    <input name="submit" type="submit" value=" Login ">
+                    <button id="login" onclick="loginUser()">Go</button>
                 </fieldset>
-              <span><?php echo $error; ?></span>
+          <!--    <span><?php echo $error; ?></span>-->
             </form>
         </div>
     </li>
@@ -69,8 +73,7 @@
         </section>
 
     <?php
-        session_start(); // Starting Session
-        $error=''; // Variable To Store Error Message
+/*        $error=''; // Variable To Store Error Message
         if (isset($_POST['submit'])) {
           if (empty($_POST['username']) || empty($_POST['password'])) {
             $error = "Username or Password is invalid";
@@ -100,11 +103,124 @@
             }
             mysql_close($connection); // Closing Connection
           }
-        }
-        ?>
-                <footer>&copy; 2015 Andrew Mortimer</footer>
-        <script src="SPSModel.js"></script>
+        }*/
+        ?> 
+        <script>
+            function init() {
+                if (localStorage) {
+                    if (localStorage.username) {
+                        var uName = localStorage.username;
+                        document.getElementById("nameBox").value = "hi, " + uName + "!";
+                    }
+                }
+                if (localStorage) {
+                    if (localStorage.userID) {
+                        document.getElementById("userID").value = localStorage.userID;
+                        var uId = document.getElementById("userID").value;
+                        console.log(uId);
+                        getFavourites(uId);
+                    }
+                }
+            }
+
+ /*           function getFavourites(uId) {
+                if (uId === "") {
+                    document.getElementById("placesDiv").innerHTML = "";
+                    return;
+                } else {
+                    if (window.XMLHttpRequest) {
+                        // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttp = new XMLHttpRequest();
+                    } else {
+                        // code for IE6, IE5
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.onreadystatechange = function() {
+                        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                            console.log(xmlhttp.responseText);
+                            document.getElementById("placesDiv").innerHTML = xmlhttp.responseText;
+                        }
+                    };
+                    xmlhttp.open("GET", "getFavourites.php?id=" + uId, true);
+                    xmlhttp.send();
+                }
+            }*/
+            function signUp() {
+                var div1 = document.getElementById("SignUp"),
+                        div2 = document.getElementById("LB2");
+
+                div1.style.display = "block";
+                div2.style.display = "block";
+            }
+
+            function login() {
+                var div1 = document.getElementById("Login"),
+                        div2 = document.getElementById("LB");
+
+                div1.style.display = "block";
+                div2.style.display = "block";
+            }
+
+            function noSignIn() {
+                var div1 = document.getElementById("SignUp"),
+                        div2 = document.getElementById("LB2");
+
+                div1.style.display = "none";
+                div2.style.display = "none";
+            }
+
+            function noLogin() {
+                var div1 = document.getElementById("Login"),
+                        div2 = document.getElementById("LB");
+
+                div1.style.display = "none";
+                div2.style.display = "none";
+            }
+
+            function addNewUser() {
+                var name = document.getElementById("name2").value,
+                        password = document.getElementById("password2").value;
+
+                console.log(name + "    " + password);
+
+                if (name.length === 0) {
+                    console.log("noname");
+                    window.alert("must supply a username!")
+                } else if (password.length < 6) {
+                    console.log("password too short, minimum 6 characters");
+                    window.alert("password too short, minimum 6 characters")
+                } else if (password !== document.getElementById("password3").value) {
+                    console.log("notsamepass");
+                    window.alert("passwords do not match!")
+                } else {
+                    window.location.href = "registration.php?w1=" + name + "&w2=" + password;
+                }
+
+            }
+
+            function loginUser() {
+
+                var name = document.getElementById("name").value;
+                var password = document.getElementById("password").value;
+
+
+                if (localStorage) {
+                    localStorage.username = name;
+                }
+
+                window.location.href = "login.php?y1=" + name + "&y2=" + password;
+
+
+            }
+
+
+
+
+        
+        </script>
+     <!--           <footer>&copy; 2015 Andrew Mortimer</footer>-->
+   <!--     <script src="SPSModel.js"></script>
         <script src="SPSView.js"></script>
-        <script src="SPSController.js"></script>
+        <script src="SPSController.js"></script>-->
     </body>
 </html>
