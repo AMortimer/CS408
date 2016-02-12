@@ -11,19 +11,19 @@ if (mysqli_connect_errno()) {
 }
 
 if (isset($log_name) && isset($log_pass)) {
-    $query = ("SELECT * FROM helpers WHERE Name = '$log_name' && password = '$log_pass'");
-    $idQuery = ("SELECT U_id FROM helpers WHERE Name = '$log_name' && password = '$log_pass'");
+    $query = ("SELECT * FROM helpers WHERE username = '$log_name' && password = '$log_pass'");
+    $idQuery = ("SELECT username FROM helpers WHERE username = '$log_name' && password = '$log_pass'");
 
     $idResult = mysqli_query($conn, $idQuery);
     $Uid = mysqli_fetch_array($idResult);
-    echo $Uid['U_id'];
+    echo $username['username'];
     ?>
     <script>
-        var id = "<?php Print($Uid['U_id']); ?>";
+        var id = "<?php Print($username['username']); ?>";
         if (localStorage) {
-            localStorage.userID = id;
+            localStorage.username = id;
         }
-        document.getElementById("userID").value = id;
+        document.getElementById("username").value = id;
     </script>
     <?php
     $result = mysqli_query($conn, $query);
@@ -40,7 +40,7 @@ if (isset($log_name) && isset($log_pass)) {
                 if (localStorage.username) {
                     var uName = localStorage.username;
                     console.log(uName);
-                    document.getElementById("nameBox").value = uName;
+                    document.getElementById("username").value = uName;
                 }
             }
         </script>	

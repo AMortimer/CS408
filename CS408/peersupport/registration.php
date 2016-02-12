@@ -1,15 +1,14 @@
-
 <?php
 
-$username = $_GET['w1'];
-$name = $_GET['w3'];
-$password = $_GET['w3'];
+$username = (isset($_GET['w1']) ? $_GET['w1'] : null);
+$name = (isset($_GET['w2']) ? $_GET['w2'] : null);
+$password = (isset($_GET['w3']) ? $_GET['w3'] : null);
 
 $conn = mysql_connect("devweb2014.cis.strath.ac.uk", "rnb12162", "consista");
 mysql_select_db("rnb12162") or die(mysql_error());
 
 
-if (isset($name) && isset($password)) {
+if (isset($username) && isset($name) && isset($password)) {
     $dupsql = "SELECT * FROM helpers WHERE (username = '$username')";
     $dupquery = mysql_query($dupsql);
     if (mysql_num_rows($dupquery) > 0) {
@@ -29,11 +28,10 @@ if (isset($name) && isset($password)) {
     }
 }
 
-if (!empty($_POST['name'])) {   //checking the 'user' name which is from Sign-Up.html, is it empty or have some text
-    $query = mysql_query("SELECT * FROM Users WHERE Name = '$_POST[name]'") or die(mysql_error());
+if (!empty($_POST['username'])) {   //checking the 'user' name which is from register.html, is it empty or have some text
+    $query = mysql_query("SELECT * FROM helpers WHERE username = '$_POST[username]'") or die(mysql_error());
 
     if (!$row = mysql_fetch_array($query) or die(mysql_error())) {
-        NewUser();
     } else {
         echo "SORRY...YOU ARE ALREADY REGISTERED USER...";
     }

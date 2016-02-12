@@ -10,7 +10,7 @@ function addNewPost($title, $post){
       VALUES ('$title', '$post')")
       or die(mysql_error());
       
-      header('Location: forum.html');
+      header('Location: forum.php');
 }
 
 function test_data($data) {

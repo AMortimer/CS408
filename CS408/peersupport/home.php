@@ -31,7 +31,7 @@ session_start();
             });
         </script>
     </head>
-    <body>
+    <body onload="init();">
         <div class ="home">
             <a href="home.php" class="homeBtn">Home</a>
         </div>
@@ -58,12 +58,12 @@ session_start();
             <form action="" method="post" id="loginForm">
                 <fieldset id="inputs">
                     <label>Username:</label>
-                    <input id="name" name="username" placeholder="username" type="text" required>
+                    <input id="username" name="username" placeholder="username" type="text" required>
                     <label>Password :</label>
                     <input id="password" name="password" placeholder="******" type="password" required>
                 </fieldset>
                 <fieldset id="actions">
-                    <button id="login" onclick="loginUser()">Go</button>
+                    <button id="go" onclick="loginUser()">Go</button>
                 </fieldset>
           <!--    <span><?php echo $error; ?></span>-->
             </form>
@@ -110,18 +110,18 @@ session_start();
                 if (localStorage) {
                     if (localStorage.username) {
                         var uName = localStorage.username;
-                        document.getElementById("nameBox").value = "hi, " + uName + "!";
+                        document.getElementById("username").value = "Welcome, " + uName + "!";
                     }
                 }
-                if (localStorage) {
+             /*   if (localStorage) {
                     if (localStorage.userID) {
                         document.getElementById("userID").value = localStorage.userID;
                         var uId = document.getElementById("userID").value;
                         console.log(uId);
-                        getFavourites(uId);
+                   //     getFavourites(uId);
                     }
-                }
-            }
+                } */
+            } 
 
  /*           function getFavourites(uId) {
                 if (uId === "") {
@@ -145,73 +145,47 @@ session_start();
                     xmlhttp.send();
                 }
             }*/
-            function signUp() {
-                var div1 = document.getElementById("SignUp"),
-                        div2 = document.getElementById("LB2");
 
-                div1.style.display = "block";
-                div2.style.display = "block";
-            }
 
             function login() {
-                var div1 = document.getElementById("Login"),
+                var div1 = document.getElementById("go"),
                         div2 = document.getElementById("LB");
 
                 div1.style.display = "block";
                 div2.style.display = "block";
             }
 
-            function noSignIn() {
+/*            function noSignIn() {
                 var div1 = document.getElementById("SignUp"),
                         div2 = document.getElementById("LB2");
 
                 div1.style.display = "none";
                 div2.style.display = "none";
-            }
+            }*/
 
             function noLogin() {
-                var div1 = document.getElementById("Login"),
-                        div2 = document.getElementById("LB");
+                var div1 = document.getElementById("Login");
+                   //     div2 = document.getElementById("LB");
 
                 div1.style.display = "none";
                 div2.style.display = "none";
-            }
-
-            function addNewUser() {
-                var name = document.getElementById("name2").value,
-                        password = document.getElementById("password2").value;
-
-                console.log(name + "    " + password);
-
-                if (name.length === 0) {
-                    console.log("noname");
-                    window.alert("must supply a username!")
-                } else if (password.length < 6) {
-                    console.log("password too short, minimum 6 characters");
-                    window.alert("password too short, minimum 6 characters")
-                } else if (password !== document.getElementById("password3").value) {
-                    console.log("notsamepass");
-                    window.alert("passwords do not match!")
-                } else {
-                    window.location.href = "registration.php?w1=" + name + "&w2=" + password;
-                }
-
             }
 
             function loginUser() {
 
-                var name = document.getElementById("name").value;
+                var username = document.getElementById("username").value;
                 var password = document.getElementById("password").value;
 
 
                 if (localStorage) {
-                    localStorage.username = name;
+                    localStorage.username = username;
                 }
 
-                window.location.href = "login.php?y1=" + name + "&y2=" + password;
+                window.location.href = "login.php?y1=" + username + "&y2=" + password;
 
 
             }
+         
 
 
 
