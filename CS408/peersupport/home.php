@@ -30,50 +30,8 @@ session_start();
                 })
             });
         </script>
-    </head>
-    <body onload="init();">
-        <div class ="home">
-            <a href="home.php" class="homeBtn">Home</a>
-        </div>
-        <div class="toolbar">
-        <a href="forum.php" class="btn">Forum</a>
-        <a href="chat.html" class="btn">Chat</a>
-        <a href="about.html" class="btn">Help</a>
-        </div>
-        <div class ="register">
-            <a href="register.html" class="btn">Register to help</a>
-        </div>
-        <section id="mainsection" class="mainsection">
-         <!--   <input type="text" name ="display" size="16" id="input" readonly><br> -->
-         <br>
-         <br>
-         Welcome.
-         <div id="signIn">
-    <li id="login">
-        <a id="login-trigger" href='#'>
-            Sign in <span></span>
-        </a>
-        <div id="login-content">
-            <h2>Login Form</h2>
-            <form action="" method="post" id="loginForm">
-                <fieldset id="inputs">
-                    <label>Username:</label>
-                    <input id="username" name="username" placeholder="username" type="text" required>
-                    <label>Password :</label>
-                    <input id="password" name="password" placeholder="******" type="password" required>
-                </fieldset>
-                <fieldset id="actions">
-                    <button id="go" onclick="loginUser()">Go</button>
-                </fieldset>
-          <!--    <span><?php echo $error; ?></span>-->
-            </form>
-        </div>
-    </li>
-         </div>
-        </section>
-
     <?php
-/*        $error=''; // Variable To Store Error Message
+        $error=''; // Variable To Store Error Message
         if (isset($_POST['submit'])) {
           if (empty($_POST['username']) || empty($_POST['password'])) {
             $error = "Username or Password is invalid";
@@ -93,26 +51,27 @@ session_start();
             // Selecting Database
             $db = mysql_select_db("rnb12162", $connection); //uname
             // SQL query to fetch information of registerd users and finds user match.
-            $query = mysql_query("select * from login where password='$password' AND username='$username'", $connection);
+            $query = mysql_query("select * from users where password='$password' AND username='$username'", $connection);
             $rows = mysql_num_rows($query);
             if ($rows == 1) {
-              $_SESSION['login_user']=$username; // Initializing Session
-              header("location: index.html"); // Redirecting To Other Page
+              $_SESSION['username']=$username; // Initializing Session
+             header("location: home.php"); // Redirecting To Other Page
             } else {
               $error = "Username or Password is invalid";
             }
             mysql_close($connection); // Closing Connection
           }
-        }*/
+        }
         ?> 
         <script>
-            function init() {
+/*            function init() {
                 if (localStorage) {
                     if (localStorage.username) {
                         var uName = localStorage.username;
+                        console.log(uName);
                         document.getElementById("username").value = "Welcome, " + uName + "!";
                     }
-                }
+                } */
              /*   if (localStorage) {
                     if (localStorage.userID) {
                         document.getElementById("userID").value = localStorage.userID;
@@ -120,8 +79,8 @@ session_start();
                         console.log(uId);
                    //     getFavourites(uId);
                     }
-                } */
-            } 
+                } 
+            } */
 
  /*           function getFavourites(uId) {
                 if (uId === "") {
@@ -147,13 +106,13 @@ session_start();
             }*/
 
 
-            function login() {
+/*            function login() {
                 var div1 = document.getElementById("go"),
                         div2 = document.getElementById("LB");
 
                 div1.style.display = "block";
                 div2.style.display = "block";
-            }
+            }*/
 
 /*            function noSignIn() {
                 var div1 = document.getElementById("SignUp"),
@@ -163,15 +122,15 @@ session_start();
                 div2.style.display = "none";
             }*/
 
-            function noLogin() {
+/*            function noLogin() {
                 var div1 = document.getElementById("Login");
                    //     div2 = document.getElementById("LB");
 
                 div1.style.display = "none";
                 div2.style.display = "none";
-            }
+            }*/
 
-            function loginUser() {
+/*            function loginUser() {
 
                 var username = document.getElementById("username").value;
                 var password = document.getElementById("password").value;
@@ -181,17 +140,54 @@ session_start();
                     localStorage.username = username;
                 }
 
-                window.location.href = "login.php?y1=" + username + "&y2=" + password;
-
+                window.location.href = "login.php?";
 
             }
-         
-
-
-
-
-        
+*/
         </script>
+            </head>
+    <body>
+        <div class ="home">
+            <a href="home.php" class="homeBtn">Home</a>
+        </div>
+        <div class="toolbar">
+        <a href="forum.php" class="btn">Forum</a>
+        <a href="chat.html" class="btn">Chat</a>
+        <a href="about.html" class="btn">Help</a>
+        </div>
+        <div class ="register">
+            <a href="register.html" class="btn">Register to help</a>
+        </div>
+        <section id="mainsection" class="mainsection">
+         <!--   <input type="text" name ="display" size="16" id="input" readonly><br> -->
+         <br>
+         <br>
+         Welcome.
+         <div id="signIn">
+    <li id="login">
+        <a id="login-trigger" href='#'>
+            Sign in <span></span>
+        </a>
+        <div id="login-content">
+            <h2>Login Form</h2>
+          <!--  <input type ="hidden" id ="userID" value =" "/> -->
+            <form action="" method="post" id="loginForm">
+                <fieldset id="inputs">
+                    <label>Username:</label>
+                    <input id="username" name="username" placeholder="username" type="text" required>
+                    <label>Password :</label>
+                    <input id="password" name="password" placeholder="******" type="password" required>
+                </fieldset>
+                <fieldset id="actions">
+               <!--     <button id="go" onclick="loginUser()">Go</button> -->
+               <input name="submit" type="submit" value=" Login ">
+                </fieldset>
+              <span><?php echo $error; ?></span>
+            </form>
+        </div>
+    </li>
+         </div>
+        </section>
      <!--           <footer>&copy; 2015 Andrew Mortimer</footer>-->
    <!--     <script src="SPSModel.js"></script>
         <script src="SPSView.js"></script>
