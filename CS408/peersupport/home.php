@@ -18,134 +18,7 @@ session_start();
         <link rel="icon" sizes="192x192" href="bigAppIcon.png" />
         <link rel="apple-touch-icon" href="bigAppIcon.png" />
         <link rel="shortcut icon" href="smallAppIcon.png" type="image/x-icon" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-        <script>
-            $(document).ready(function(){
-              $('#login-trigger').click(function(){
-                $(this).next('#login-content').slideToggle();
-                $(this).toggleClass('active');          
-
-                if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;')
-                  else $(this).find('span').html('&#x25BC;')
-                })
-            });
-        </script>
-    <?php
-        $error=''; // Variable To Store Error Message
-        if (isset($_POST['submit'])) {
-          if (empty($_POST['username']) || empty($_POST['password'])) {
-            $error = "Username or Password is invalid";
-          }
-          else
-          {
-            // Define $username and $password
-            $username=$_POST['username'];
-            $password=$_POST['password'];
-            // Establishing Connection with Server by passing server_name, user_id and password as a parameter
-            $connection = mysql_connect("devweb2014.cis.strath.ac.uk", "rnb12162", "consista"); //username and password
-            // To protect MySQL injection for Security purpose
-            $username = stripslashes($username);
-            $password = stripslashes($password);
-            $username = mysql_real_escape_string($username);
-            $password = mysql_real_escape_string($password);
-            // Selecting Database
-            $db = mysql_select_db("rnb12162", $connection); //uname
-            // SQL query to fetch information of registerd users and finds user match.
-            $query = mysql_query("select * from users where password='$password' AND username='$username'", $connection);
-            $rows = mysql_num_rows($query);
-            if ($rows == 1) {
-              $_SESSION['username']=$username; // Initializing Session
-             header("location: home.php"); // Redirecting To Other Page
-            } else {
-              $error = "Username or Password is invalid";
-            }
-            mysql_close($connection); // Closing Connection
-          }
-        }
-        ?> 
-        <script>
-/*            function init() {
-                if (localStorage) {
-                    if (localStorage.username) {
-                        var uName = localStorage.username;
-                        console.log(uName);
-                        document.getElementById("username").value = "Welcome, " + uName + "!";
-                    }
-                } */
-             /*   if (localStorage) {
-                    if (localStorage.userID) {
-                        document.getElementById("userID").value = localStorage.userID;
-                        var uId = document.getElementById("userID").value;
-                        console.log(uId);
-                   //     getFavourites(uId);
-                    }
-                } 
-            } */
-
- /*           function getFavourites(uId) {
-                if (uId === "") {
-                    document.getElementById("placesDiv").innerHTML = "";
-                    return;
-                } else {
-                    if (window.XMLHttpRequest) {
-                        // code for IE7+, Firefox, Chrome, Opera, Safari
-                        xmlhttp = new XMLHttpRequest();
-                    } else {
-                        // code for IE6, IE5
-                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                    }
-                    xmlhttp.onreadystatechange = function() {
-                        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-                            console.log(xmlhttp.responseText);
-                            document.getElementById("placesDiv").innerHTML = xmlhttp.responseText;
-                        }
-                    };
-                    xmlhttp.open("GET", "getFavourites.php?id=" + uId, true);
-                    xmlhttp.send();
-                }
-            }*/
-
-
-/*            function login() {
-                var div1 = document.getElementById("go"),
-                        div2 = document.getElementById("LB");
-
-                div1.style.display = "block";
-                div2.style.display = "block";
-            }*/
-
-/*            function noSignIn() {
-                var div1 = document.getElementById("SignUp"),
-                        div2 = document.getElementById("LB2");
-
-                div1.style.display = "none";
-                div2.style.display = "none";
-            }*/
-
-/*            function noLogin() {
-                var div1 = document.getElementById("Login");
-                   //     div2 = document.getElementById("LB");
-
-                div1.style.display = "none";
-                div2.style.display = "none";
-            }*/
-
-/*            function loginUser() {
-
-                var username = document.getElementById("username").value;
-                var password = document.getElementById("password").value;
-
-
-                if (localStorage) {
-                    localStorage.username = username;
-                }
-
-                window.location.href = "login.php?";
-
-            }
-*/
-        </script>
-            </head>
+    </head> 
     <body>
         <div class ="home">
             <a href="home.php" class="homeBtn">Home</a>
@@ -156,41 +29,50 @@ session_start();
         <a href="about.html" class="btn">Help</a>
         </div>
         <div class ="register">
-            <a href="register.html" class="btn">Register to help</a>
+            <a href="register.html" class="btn">Register</a>
         </div>
         <section id="mainsection" class="mainsection">
          <!--   <input type="text" name ="display" size="16" id="input" readonly><br> -->
          <br>
          <br>
-         Welcome.
-         <div id="signIn">
-    <li id="login">
-        <a id="login-trigger" href='#'>
-            Sign in <span></span>
-        </a>
-        <div id="login-content">
-            <h2>Login Form</h2>
-          <!--  <input type ="hidden" id ="userID" value =" "/> -->
-            <form action="" method="post" id="loginForm">
-                <fieldset id="inputs">
-                    <label>Username:</label>
-                    <input id="username" name="username" placeholder="username" type="text" required>
-                    <label>Password :</label>
-                    <input id="password" name="password" placeholder="******" type="password" required>
-                </fieldset>
-                <fieldset id="actions">
-               <!--     <button id="go" onclick="loginUser()">Go</button> -->
-               <input name="submit" type="submit" value=" Login ">
-                </fieldset>
-              <span><?php echo $error; ?></span>
-            </form>
-        </div>
-    </li>
-         </div>
+         <?php if (!empty($_POST['username'])) {
+             echo "Welcome ";
+         }
+         else {
+             echo "Please sign in";
+         }
+         ?>
+         
+    <div id="signIn">
+        <a href="login.php" class="btn">Log In</a>
+    </div>
+         <button onclick = "generateID()">Test</button>
         </section>
+        <script src="newIdentity.js"</script>
      <!--           <footer>&copy; 2015 Andrew Mortimer</footer>-->
    <!--     <script src="SPSModel.js"></script>
         <script src="SPSView.js"></script>
         <script src="SPSController.js"></script>-->
+     <script>
+        var id=null;
+        var oldId;
+
+       function getOldID(id) {
+           var oldId=id;
+           return oldId;
+       }
+
+       function generateID(id, n) {
+           var newId;
+           if (id===null) {
+               newId = 123457;
+           }
+           else {
+               newId = getOldID(oldId)*n;
+               console.log(newId);
+           }
+           return newId;
+    </script>
+
     </body>
 </html>

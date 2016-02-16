@@ -1,4 +1,5 @@
 <?php
+session_start();
   $connection = mysql_connect("devweb2014.cis.strath.ac.uk", "rnb12162", "consista");
 
   // Selecting Database
@@ -8,7 +9,7 @@
   if(isset($_SESSION['username'])) {
     $user_check=$_SESSION['username'];
     // SQL Query To Fetch Complete Information Of User
-    $ses_sql=mysql_query("SELECT username FROM helpers WHERE username='$user_check'", $connection);
+    $ses_sql=mysql_query("SELECT username FROM users WHERE username='$user_check'", $connection);
     $row = mysql_fetch_assoc($ses_sql);
     $login_session =$row['username'];
   }
