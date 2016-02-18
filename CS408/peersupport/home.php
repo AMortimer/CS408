@@ -42,37 +42,56 @@ session_start();
              echo "Please sign in";
          }
          ?>
+    
+    <script>        
+/*       function randomNumber() {
+           var randNo = Math.floor(100000 + Math.random() * 900000);
+           if ((randNo%5===0) || (randNo%2===0)) {
+               randomNumber();
+           }
+           else {
+               console.log(randNo);
+               return randNo;
+           }
+       } */
+       function firstID(){
+           var firstId;
+            //   firstId = randomNumber();
+           firstId = Math.floor(100000 + Math.random() * 900000);
+           return firstId;
+       }
+
+       function getOldID(n) {
+            n = firstID();
+            return n;
+       }
+
+       function generateID(n) {
+           var newId;
+           var id;
+           if(n<=1) {
+              newId = getOldID(n); 
+           }
+           else {
+              id = (getOldID(n)*n); 
+              newId=id%1000000;
+           }
+               
+           console.log(n);
+           console.log(newId);
+           return newId;
+       }
+    </script>     
          
     <div id="signIn">
         <a href="login.php" class="btn">Log In</a>
     </div>
-         <button onclick = "generateID()">Test</button>
+         <button id="test" onclick = "generateID(3)">Test</button>
         </section>
         <script src="newIdentity.js"</script>
      <!--           <footer>&copy; 2015 Andrew Mortimer</footer>-->
    <!--     <script src="SPSModel.js"></script>
         <script src="SPSView.js"></script>
         <script src="SPSController.js"></script>-->
-     <script>
-        var id=null;
-        var oldId;
-
-       function getOldID(id) {
-           var oldId=id;
-           return oldId;
-       }
-
-       function generateID(id, n) {
-           var newId;
-           if (id===null) {
-               newId = 123457;
-           }
-           else {
-               newId = getOldID(oldId)*n;
-               console.log(newId);
-           }
-           return newId;
-    </script>
-
     </body>
 </html>
