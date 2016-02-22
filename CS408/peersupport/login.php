@@ -1,36 +1,43 @@
 <?php
 // Start the session
-session_start();
+//session_start();
+
     $error=''; // Variable To Store Error Message
-    if (isset($_POST['submit'])) {
-      if (empty($_POST['username']) || empty($_POST['password'])) {
-        $error = "Username or Password is invalid";
-      }
-      else
-      {
-        // Define $username and $password
-        $username=$_POST['username'];
-        $password=$_POST['password'];
-        // Establishing Connection with Server by passing server_name, user_id and password as a parameter
-        $connection = mysql_connect("devweb2014.cis.strath.ac.uk", "rnb12162", "consista"); //username and password
-        // To protect MySQL injection for Security purpose
-        $username = stripslashes($username);
-        $password = stripslashes($password);
-        $username = mysql_real_escape_string($username);
-        $password = mysql_real_escape_string($password);
-        // Selecting Database
-        $db = mysql_select_db("rnb12162", $connection); //uname
-        // SQL query to fetch information of registerd users and finds user match.
-        $query = mysql_query("select * from users where password='$password' AND username='$username'", $connection);
-        $rows = mysql_num_rows($query);
-        if ($rows == 1) {
-          $_SESSION['username']=$username; // Initializing Session
-         header("location: home.php"); // Redirecting To Other Page
-        } else {
-          $error = "Username or Password is invalid";
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if (isset($_POST['submit'])) {
+          if (empty($_POST['username']) || empty($_POST['password'])) {
+            $error = "Username or Password is invalid";
+          }
+          else
+          {
+            // Define $username and $password
+            $username=$_POST['username'];
+            $password=$_POST['password'];
+            // Establishing Connection with Server by passing server_name, user_id and password as a parameter
+            $connection = mysql_connect("devweb2014.cis.strath.ac.uk", "rnb12162", "consista"); //username and password
+            // To protect MySQL injection for Security purpose
+            $username = stripslashes($username);
+            $password = stripslashes($password);
+            $username = mysql_real_escape_string($username);
+            $password = mysql_real_escape_string($password);
+            // Selecting Database
+            $db = mysql_select_db("rnb12162", $connection); //uname
+            // SQL query to fetch information of registerd users and finds user match.
+            $query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+            $result = mysql_query($query);
+            $rows = mysql_num_rows($result);
+            if ($rows > 0) {
+                session_start();   
+                $_SESSION['login']="1"; // Initializing Session
+                header("location: home.php"); // Redirecting To Other Page
+            } else {
+                session_start();
+                $_SESSION['login']="";
+              $error = "Username or Password is invalid";
+            }
+        //    mysql_close($connection); // Closing Connection
+          }
         }
-        mysql_close($connection); // Closing Connection
-      }
     }
     ?>
 <html>
@@ -59,7 +66,6 @@ session_start();
         <div class ="register">
             <a href="register.html" class="btn">Register</a>
         </div>
-    <li id="login">
         <div id="login-content">
             Login
             <form action="home.php" method="post" id="loginForm">
@@ -75,6 +81,5 @@ session_start();
                 </fieldset>
             </form>
         </div>
-    </li>
 </body>
 </html> 

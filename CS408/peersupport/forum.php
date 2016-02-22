@@ -1,3 +1,11 @@
+<?php
+session_start();
+//if (!(isset($_SESSION['login']) && $_SESSION['login'] != '')) {
+//header ("Location: home.php");
+//}
+//Create Connection
+
+?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -9,7 +17,7 @@ and open the template in the editor.
         <title>Forum</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script>
+<!--        <script>
             $(document).ready(function(){
               $('#forum-trigger').click(function(){
                 $(this).next('#forums-content').slideToggle();
@@ -19,7 +27,7 @@ and open the template in the editor.
                   else $(this).find('span').html('&#x25BC;')
                 })
             });
-        </script>
+        </script> -->
     </head>
     <body onload='viewEntries()'>
         
@@ -34,12 +42,67 @@ and open the template in the editor.
         <div class ="register">
             <a href="register.html" class="btn">Register to help</a>
         </div>
-        <li id="addPost">
-        <a id="addPost-trigger" href='#'>
+    <script>        
+/*       function randomNumber() {
+           var randNo = Math.floor(100000 + Math.random() * 900000);
+           if ((randNo%5===0) || (randNo%2===0)) {
+               randomNumber();
+           }
+           else {
+               console.log(randNo);
+               return randNo;
+           }
+       } */
+       function firstID(){
+           var firstId;
+            //   firstId = randomNumber();
+           firstId = Math.floor(100000 + Math.random() * 900000);
+           return firstId;
+       }
+
+       function getOldID(n) {
+            n = firstID();
+            return n;
+       }
+
+       function generateID(n) {
+           var newId;
+           var id;
+           if(n<=1) {
+              newId = getOldID(n); 
+           }
+           else {
+              id = (getOldID(n)*n); 
+              newId=id%1000000;
+           }
+               
+           console.log(n);
+           console.log(newId);
+           return newId;
+       }
+    </script>
+    <div  id="identity">   
+        <?php
+        mysql_connect("devweb2014.cis.strath.ac.uk", "rnb12162", "consista");
+
+        mysql_select_db("rnb12162") or die(mysql_error());
+        $query = "SELECT * FROM users";
+
+        $result = mysql_query($query) or die(mysql_error());
+        if(mysql_num_rows($result) > 0) {
+            $id = mysql_fetch_array($result);
+            echo $id['userid'];
+        }
+        ?>
+    </div> 
+<!--        <li id="addPost"> -->
+<!--        <a id="addPost-trigger" href='#'>
             Add new forum
-        </a>
+        </a> -->
+        
+        <button id="addForum" onclick = "generateID(<?php $id; ?>)">Add new forum</button>
         <div id="login-content">
-              <span><?php echo $error; ?></span>
+<!--              <span><?php echo $error; ?></span> -->
                 <form class="entryForm" action="addPost.php" onsubmit="return checkEntry()" method="POST">
                     <table>
                         <tr>
@@ -62,7 +125,7 @@ and open the template in the editor.
                     </table>
                 </form>
         </div>
-        </li>
+<!--        </li> -->
         <div id="addEntry">
 
             </div>
@@ -75,13 +138,13 @@ and open the template in the editor.
 		var title = document.getElementById("title");
 		var entry   = document.getElementById("body");
 		
-		if(title.value == "" || entry.value == "") {
+		if(title.value === "" || entry.value === "") {
 			alert("Please fill in all text fields");
 			return false;
-		}
+                    }
 		}
         </script>
-                <script>
+        <script>
 		function viewEntries() {
                     var xmlhttp;
                     
@@ -92,7 +155,7 @@ and open the template in the editor.
 				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 		    }
 			 xmlhttp.onreadystatechange=function() {
-			 if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+			 if (xmlhttp.readyState===4 && xmlhttp.status===200) {
 				document.getElementById("forum").innerHTML=xmlhttp.responseText;
 			    }	
 			}
