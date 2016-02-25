@@ -1,6 +1,6 @@
 <?php
 // Start the session
-//session_start();
+session_start();
 
     $error=''; // Variable To Store Error Message
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -23,19 +23,17 @@
             // Selecting Database
             $db = mysql_select_db("rnb12162", $connection); //uname
             // SQL query to fetch information of registerd users and finds user match.
-            $query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
-            $result = mysql_query($query);
-            $rows = mysql_num_rows($result);
+            $query = mysql_query("SELECT * FROM users WHERE username='$username' AND password='$password'", $connection);
+            $rows = mysql_num_rows($query);
             if ($rows > 0) {
                 session_start();   
-                $_SESSION['login']="1"; // Initializing Session
+                $_SESSION['login']=true; // Initializing Session
+                $_SESSION['username']=$username;
                 header("location: home.php"); // Redirecting To Other Page
             } else {
-                session_start();
-                $_SESSION['login']="";
               $error = "Username or Password is invalid";
             }
-        //    mysql_close($connection); // Closing Connection
+            mysql_close($connection); // Closing Connection
           }
         }
     }
@@ -50,8 +48,6 @@
         <meta name="mobile-web-app-capable" content="yes"/>
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <link rel="icon" sizes="192x192" href="bigAppIcon.png" />
-        <link rel="apple-touch-icon" href="bigAppIcon.png" />
-        <link rel="shortcut icon" href="smallAppIcon.png" type="image/x-icon" />
   <!--      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
     </head>
     <body>

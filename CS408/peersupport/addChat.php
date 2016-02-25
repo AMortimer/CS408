@@ -6,7 +6,7 @@ function addNewChat($post){
       
       mysql_select_db("rnb12162") or die(mysql_error());
 
-      mysql_query("INSERT INTO SupportChat (comment)
+      mysql_query("INSERT INTO chat (message)
       VALUES ('$post')")
       or die(mysql_error());
       
@@ -28,7 +28,7 @@ function test_data($data) {
   return $data;
 }
 
-$post     = test_data($_POST['comment']);
+$post     = test_data($_POST['message']);
 addNewChat($post);
 ?>
 

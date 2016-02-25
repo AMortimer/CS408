@@ -5,7 +5,7 @@
 
       mysql_select_db("rnb12162") or die(mysql_error());
 
-     $query = "SELECT * FROM SupportChat 
+     $query = "SELECT * FROM chat 
 	       ORDER BY date DESC
                LIMIT 30";
 	       
@@ -17,7 +17,7 @@
         while($row = mysql_fetch_array($result)){
 			echo "<tr>";
 			echo "<td>" . $row['date']  . "</td>";
-			echo "<td>" . $row['comment']	 . "</td>";
+			echo "<td>" . $row['message']	 . "</td>";
 			echo "</tr>";
 		}
 		echo "</table>";

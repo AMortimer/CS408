@@ -19,7 +19,7 @@
                 mysql_select_db("rnb12162") or die(mysql_error());
 
                 // Build an SQL query to add the new entry into the helpers table
-                mysql_query("INSERT INTO helpers
+                mysql_query("INSERT INTO users
                 (username, name, password) VALUES('$_POST[username]', '$_POST[name]', '$_POST[password]' )")
                 or die(mysql_error());  
                 // Execute the query

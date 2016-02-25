@@ -30,14 +30,36 @@ if (isset($username) && isset($name) && isset($password)) {
         <?php
     if (!empty($_POST['username'])) {   //checking the 'user' name which is from register.html, is it empty or have some text
         $query = mysql_query("SELECT * FROM users WHERE username = '$_POST[username]'") or die(mysql_error());
-
+        }
+        else {
+            ?>
+            <script type="text/javascript">
+                alert("nousername");
+                window.location.href = "register.html";
+            </script>
+            <?php
+        }
         if (!$row = mysql_fetch_array($query) or die(mysql_error())) {
         } else {
             echo "SORRY...YOU ARE ALREADY REGISTERED USER...";
         }
+    if (!empty($_POST['name'])) {   //checking the 'user' name which is from register.html, is it empty or have some text
+        $query = mysql_query("SELECT * FROM users WHERE name = '$_POST[name]'") or die(mysql_error());
+    }
+        else {
+            ?>
+            <script type="text/javascript">
+                alert("noname");
+                window.location.href = "register.html";
+            </script>
+            <?php
+        }
+    }
+    if (strlen($_POST['password' < 6])) {
+        echo "Password must be 6 characters.";
     }
         
-    } else {
+     else {
         // Connect to database server
         mysql_connect("devweb2014.cis.strath.ac.uk", "rnb12162", "consista");
 
@@ -50,6 +72,9 @@ if (isset($username) && isset($name) && isset($password)) {
         // Redirect to index.html
                 header("Location: https://devweb2015.cis.strath.ac.uk/~rnb12162/CS408/peersupport/home.php");
     }
+}
+else {
+    header("Location: https://devweb2015.cis.strath.ac.uk/~rnb12162/CS408/peersupport/register.html");
 }
 ?>
 </body>

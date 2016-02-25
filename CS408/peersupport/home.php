@@ -37,11 +37,15 @@ session_start();
          <br>
          <?php if (!empty($_POST['username'])) {
              echo "Welcome ";
+             
          }
          else {
              echo "Please sign in";
          }
          ?>
+    <div id="signOut">
+        <a href="logout.php" class="btn">Log Out</a>
+    </div>
     
     <script>        
 /*       function randomNumber() {

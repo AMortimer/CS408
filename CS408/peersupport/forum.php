@@ -1,8 +1,13 @@
 <?php
 session_start();
-//if (!(isset($_SESSION['login']) && $_SESSION['login'] != '')) {
-//header ("Location: home.php");
-//}
+$username;
+if (isset($_SESSION['login']) && $_SESSION['login'] == true) {
+    $_SESSION['username'] = $username;
+    echo "Welcome " . $_SESSION['username'];
+}
+else {
+    echo "huh";
+}
 //Create Connection
 
 ?>
@@ -29,7 +34,7 @@ and open the template in the editor.
             });
         </script> -->
     </head>
-    <body onload='viewEntries()'>
+    <body <!--onload='viewEntries()'-->
         
         <div class ="home">
             <a href="home.php" class="homeBtn">Home</a>
@@ -82,9 +87,31 @@ and open the template in the editor.
        }
     </script>
     <div  id="identity">   
-        <?php
-        mysql_connect("devweb2014.cis.strath.ac.uk", "rnb12162", "consista");
+<?php
+mysql_connect("devweb2014.cis.strath.ac.uk", "rnb12162", "consista");
+mysql_select_db("rnb12162") or die(mysql_error());
 
+$userid = $_SESSION['login'];
+if (isset($userid)) {
+    $query = "SELECT * FROM users WHERE (userid = '$userid')";
+    $data = mysql_query($query);
+    $var = mysql_num_rows($data);
+    
+    while ($var > 0) {
+        $row = mysql_fetch_assoc($data);
+        echo $row['userid'];
+        $id = $row['userid'];
+        echo $row['username'];
+        echo "<br>";
+        $var--;
+    }
+    
+}
+?>
+        <?php
+/*        mysql_connect("devweb2014.cis.strath.ac.uk", "rnb12162", "consista");
+ //       $username = $_SESSION['username'];
+        $userid = $_SESSION['userid'];
         mysql_select_db("rnb12162") or die(mysql_error());
         $query = "SELECT * FROM users";
 
@@ -92,15 +119,15 @@ and open the template in the editor.
         if(mysql_num_rows($result) > 0) {
             $id = mysql_fetch_array($result);
             echo $id['userid'];
-        }
-        ?>
+        } */
+        ?> 
     </div> 
 <!--        <li id="addPost"> -->
 <!--        <a id="addPost-trigger" href='#'>
             Add new forum
         </a> -->
         
-        <button id="addForum" onclick = "generateID(<?php $id; ?>)">Add new forum</button>
+        <button id="addForum" onclick = "generateID(4)">Add new forum</button>
         <div id="login-content">
 <!--              <span><?php echo $error; ?></span> -->
                 <form class="entryForm" action="addPost.php" onsubmit="return checkEntry()" method="POST">

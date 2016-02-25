@@ -6,15 +6,15 @@ session_start();
   $db = mysql_select_db("rnb12162", $connection);
   session_start();// Starting Session
   // Storing Session
-  if(isset($_SESSION['username'])) {
-    $user_check=$_SESSION['username'];
+  if(isset($_SESSION['login'])) {
+    $user_check=$_SESSION['login'];
     // SQL Query To Fetch Complete Information Of User
     $ses_sql=mysql_query("SELECT username FROM users WHERE username='$user_check'", $connection);
     $row = mysql_fetch_assoc($ses_sql);
     $login_session =$row['username'];
   }
-//   if(!isset($login_session)){
-//     mysql_close($connection); // Closing Connection
-//     header('Location: main.php'); // Redirecting To Home Page
-//   }
+   if(!isset($login_session)){
+     mysql_close($connection); // Closing Connection
+     header('Location: main.php'); // Redirecting To Home Page
+   }
 ?>
