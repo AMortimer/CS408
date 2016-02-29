@@ -2,9 +2,9 @@
 include 'ChromePhp.php';
 // Start the session
 session_start();
-ChromePhp::log('SET');
     $error=''; // Variable To Store Error Message
-    $info = json_decode(file_get_contents('php://input'), true);
+$info = json_decode(file_get_contents('php://input'), true);
+    ChromePhp::log($info);
             // Define $username and $password
             $username=$info['username'];
             $password=$info['password'];
