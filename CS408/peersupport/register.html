@@ -10,6 +10,54 @@
         <meta name="apple-mobile-web-app-capable" content="yes" />    
     </head>
     <body>
+        <script>
+            function addNewUser() {
+                var username = document.getElementById("username").value,
+                    name = document.getElementById("name").value,
+                    password = document.getElementById("password").value,
+                    confirm = document.getElementById("confirm").value;
+                var registerInfo = "{ \"username\" : \"" + username + "\" , \"name\" : \"" + name + 
+                        "\" \"password\" : \"" + password + "\"}";
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+//                if (username.length === 0) {
+//                    console.log("nousername");
+//                    window.alert("must supply a username!");
+//                    window.location.href = "register.html";
+//                } 
+//                else if (name.length === 0) {
+//                    console.log("noname");
+//                    window.alert("must supply name");
+//                    window.location.href = "register.html";
+//                    }
+//                else if (password.length < 6) {
+//                    console.log("password too short, minimum 6 characters");
+//                    window.alert("password too short, minimum 6 characters");
+//                    window.location.href = "register.html";
+//                } 
+//                else if (password !== confirm) {
+//                    console.log("notsamepass");
+//                    window.alert("passwords do not match!");
+//                    window.location.href = "register.html";
+//                } else {
+//                    console.log("password fine");
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                           window.location.href = "home.php";
+                           console.log(username);
+                           console.log('got here');
+                        }
+                        else {
+                            console.log(xhr.responseText);
+                        }
+                    }
+  //              }
+
+                };
+                xhr.open('post', 'registration.php', true);
+                xhr.send(registerInfo);
+            }
+        </script>
         <div class ="home">
             <a href="home.php" class="homeBtn">Home</a>
         </div>
@@ -19,72 +67,17 @@
         <a href="about.html" class="btn">Help</a>
         </div>
         <div id="SignUp">
-        <form method="POST" id="registerForm">
-            <table>
-                <tr>
-                    <td><strong>University username:</strong></td>
-                    <td><input id="username" type="text" name="username" size="30"/></td>
-                </tr>
-                <tr>
-                    <td><strong>Name:</strong></td>
-                    <td><input id="name" type="text" name="name" size="30"/></td>
-                </tr>
-                <tr>
-                    <td><strong>Password:</strong></td>
-                    <td><input id="password" type="password" name="password" size="30"/></td>
-                    <td>(minimum 6 characters)</td>
-                </tr>
-                <tr>
-                    <td><strong>Confirm:</strong></td>
-                    <td><input id="confirm" type="password" name="confirm" size="30"/></td>
-                </tr>
-                <tr>
-                    <td><button id ="submit" onclick = "addNewUser()">Submit</button></td>
-                    <td><input type="reset" value="Reset" /></td>
-                </tr>
-        </table>
-        </form>
-    </div>
-        <script>
- /*           function signUp() {
-                var div1 = document.getElementById("SignUp");
-                     //   div2 = document.getElementById("LB2");
-
-                div1.style.display = "block";
-             //   div2.style.display = "block";
-            }*/
-            function addNewUser() {
-                var username = document.getElementById("username").value,
-                        name = document.getElementById("name").value,
-                        password = document.getElementById("password").value;
-
-                console.log(username + "    " + password);
-
-                if (username.length === 0) {
-                    console.log("nousername");
-                    window.alert("must supply a username!");
-                    window.location.href = "register.html?";
-                    
-                } 
-                else if (name.length === 0) {
-                    console.log("noname");
-                    window.alert("must supply name");
-                    window.location.href = "register.html?";
-                    }
-                else if (password.length < 6) {
-                    console.log("password too short, minimum 6 characters");
-                    window.alert("password too short, minimum 6 characters");
-                    window.location.href = "register.html?";
-                } 
-                else if (password !== document.getElementById("confirm").value) {
-                    console.log("notsamepass");
-                    window.alert("passwords do not match!");
-                    window.location.href = "register.html?";
-                } else {
-                    console.log("password fine");
-                    window.location.href = "registration.php?";
-                }
-            }
-        </script>    
+                    <strong>University username:</strong>
+                    <input id="username" type="text" name="username" size="30"/><br>
+                    <strong>Name:</strong>
+                    <input id="name" type="text" name="name" size="30"/><br>
+                    <strong>Password:</strong>
+                    <input id="password" type="password" name="password" size="30"/>
+                    (minimum 6 characters)<br>
+                    <strong>Confirm:</strong>
+                    <input id="confirm" type="password" name="confirm" size="30"/><br>
+                    <button id ="submit" onclick = "addNewUser()">Submit</button>
+                    <input type="reset" value="Reset" />
+        </div>    
     </body>
 </html>

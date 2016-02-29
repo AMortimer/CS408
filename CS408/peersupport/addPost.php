@@ -16,15 +16,15 @@ function addNewPost($title, $post){
 function test_data($data) {
 
     	  // Make a connection
-	  $conn = mysql_connect("devweb2014.cis.strath.ac.uk", "rnb12162", "consista");
+	  mysql_connect("devweb2014.cis.strath.ac.uk", "rnb12162", "consista");
 
     	  // Selecting Database
-	  $db = mysql_select_db("rnb12162") or die(mysql_error());
+	  mysql_select_db("rnb12162") or die(mysql_error());
 	  
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = mysql_real_escape_string($data);
-  $data = htmlspecialchars($data);
+//  $data = trim($data);
+//  $data = stripslashes($data);
+//  $data = mysql_real_escape_string($data);
+//  $data = htmlspecialchars($data);
   return $data;
 }
 

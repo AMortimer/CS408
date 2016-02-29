@@ -1,81 +1,34 @@
 <?php
+include 'ChromePhp.php';
 // Start the session
 session_start();
-
+ChromePhp::log('SET');
     $error=''; // Variable To Store Error Message
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        if (isset($_POST['submit'])) {
-          if (empty($_POST['username']) || empty($_POST['password'])) {
-            $error = "Username or Password is invalid";
-          }
-          else
-          {
+    $info = json_decode(file_get_contents('php://input'), true);
             // Define $username and $password
-            $username=$_POST['username'];
-            $password=$_POST['password'];
+            $username=$info['username'];
+            $password=$info['password'];
             // Establishing Connection with Server by passing server_name, user_id and password as a parameter
-            $connection = mysql_connect("devweb2014.cis.strath.ac.uk", "rnb12162", "consista"); //username and password
+            mysql_connect("devweb2014.cis.strath.ac.uk", "rnb12162", "consista"); //username and password
             // To protect MySQL injection for Security purpose
-            $username = stripslashes($username);
-            $password = stripslashes($password);
-            $username = mysql_real_escape_string($username);
-            $password = mysql_real_escape_string($password);
+//            $username = stripslashes($username);
+//            $password = stripslashes($password);
+//            $username = mysql_real_escape_string($username);
+//            $password = mysql_real_escape_string($password);
             // Selecting Database
-            $db = mysql_select_db("rnb12162", $connection); //uname
+            mysql_select_db("rnb12162") or die(mysql_error()); //uname
             // SQL query to fetch information of registerd users and finds user match.
-            $query = mysql_query("SELECT * FROM users WHERE username='$username' AND password='$password'", $connection);
+            $query = mysql_query("SELECT * FROM users WHERE username='$username' AND password='$password'") or die(mysql_error());
             $rows = mysql_num_rows($query);
-            if ($rows > 0) {
-                session_start();   
-                $_SESSION['login']=true; // Initializing Session
-                $_SESSION['username']=$username;
+            if ($rows == 1) {
+                $result = mysql_fetch_assoc($query);
+                $userid = $result['userid'];
+                $_SESSION['userid']=$userid; // Initializing Session
+                ChromePhp::log($_SESSION);
                 header("location: home.php"); // Redirecting To Other Page
+                http_response_code(200);
+                return "Got here.";
             } else {
               $error = "Username or Password is invalid";
             }
-            mysql_close($connection); // Closing Connection
-          }
-        }
-    }
     ?>
-<html>
-    <head>
-        <title>Supporting Peer Support</title>
-        <meta charset="UTF-8">
- <!--       <link type="text/css" rel="stylesheet" href="SPSStylesheet.css"/> -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, 
-              maximum-scale=1.0, user-scalable=no">
-        <meta name="mobile-web-app-capable" content="yes"/>
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <link rel="icon" sizes="192x192" href="bigAppIcon.png" />
-  <!--      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
-    </head>
-    <body>
-        <div class ="home">
-            <a href="home.php" class="homeBtn">Home</a>
-        </div>
-        <div class="toolbar">
-        <a href="forum.php" class="btn">Forum</a>
-        <a href="chat.html" class="btn">Chat</a>
-        <a href="about.html" class="btn">Help</a>
-        </div>
-        <div class ="register">
-            <a href="register.html" class="btn">Register</a>
-        </div>
-        <div id="login-content">
-            Login
-            <form action="home.php" method="post" id="loginForm">
-                <fieldset id="inputs">
-                    <label>Username:</label>
-                    <input id="username" name="username" placeholder="username" type="text" required>
-                    <label>Password :</label>
-                    <input id="password" name="password" placeholder="******" type="password" required>
-                </fieldset>
-                <fieldset id="actions">
-               <input name="submit" type="submit" value=" Login " >
-               <span> <?php echo $error ?> </span>
-                </fieldset>
-            </form>
-        </div>
-</body>
-</html> 

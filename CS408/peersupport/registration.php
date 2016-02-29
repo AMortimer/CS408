@@ -1,22 +1,19 @@
-<html>
-    <head>
-        <title>Register</title>
-    </head>
-    <body>
 <?php
 
 session_start();
 
-$conn = mysql_connect("devweb2014.cis.strath.ac.uk", "rnb12162", "consista");
+$info = json_decode(file_get_contents('php://input'), true);
+$username=$info['username'];
+$name=$info['name'];
+$password=$info['password'];
+
+mysql_connect("devweb2014.cis.strath.ac.uk", "rnb12162", "consista") or die(mysql(mysql_error()));
 mysql_select_db("rnb12162") or die(mysql_error());
 
 /* $username = (isset($_GET['w1']) ? $_GET['w1'] : null);
 $name = (isset($_GET['w2']) ? $_GET['w2'] : null);
 $password = (isset($_GET['w3']) ? $_GET['w3'] : null); */
 
-$username=$_POST['username'];
-$name=$_POST['name'];
-$password=$_POST['password'];
 
 if (isset($username) && isset($name) && isset($password)) {
     $dupsql = "SELECT * FROM users WHERE (username = '$username')";
@@ -29,7 +26,7 @@ if (isset($username) && isset($name) && isset($password)) {
         </script>
         <?php
     if (!empty($_POST['username'])) {   //checking the 'user' name which is from register.html, is it empty or have some text
-        $query = mysql_query("SELECT * FROM users WHERE username = '$_POST[username]'") or die(mysql_error());
+        $query = mysql_query("SELECT * FROM users WHERE username = $username") or die(mysql_error());
         }
         else {
             ?>
@@ -60,6 +57,7 @@ if (isset($username) && isset($name) && isset($password)) {
     }
         
      else {
+         ChromePhp::log('password > 6');
         // Connect to database server
         mysql_connect("devweb2014.cis.strath.ac.uk", "rnb12162", "consista");
 
@@ -77,5 +75,3 @@ else {
     header("Location: https://devweb2015.cis.strath.ac.uk/~rnb12162/CS408/peersupport/register.html");
 }
 ?>
-</body>
-</html>
