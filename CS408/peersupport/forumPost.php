@@ -23,9 +23,10 @@
         </div>
 
 <?php
+session_start();
 //create an html file and redirect to it 
 
-//set some basic html content 
+//set some basic html content
 $sHTML_Header = "<html><head><title>Forum Post</title></head><body>"; 
 $sHTML_Content = "<h2><center>This is a Test Page</center><h2><br /><hr />"; 
 $sHTML_Footer =  "</body></html>"; 

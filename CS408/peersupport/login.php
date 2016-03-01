@@ -30,5 +30,6 @@ $info = json_decode(file_get_contents('php://input'), true);
                 return "Got here.";
             } else {
               $error = "Username or Password is invalid";
+              echo $error;
             }
     ?>

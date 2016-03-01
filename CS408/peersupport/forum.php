@@ -3,45 +3,45 @@ include 'ChromePhp.php';
 session_start();
 if (!isset($_SESSION['userid'])) {
     http_response_code(400);
-    ChromePhp::log('here');
+    ChromePhp::log('session not set');
     return;
 }
 else {
+    $info = json_decode(file_get_contents('php://input'), true);
+    ChromePhp::log($info);
     ChromePhp::log('session');
-}
+    $title = $info['title'];
+    $body = $info['body'];
+    $userid=$_SESSION['userid'];
+    ChromePhp::log($userid);
+
 //Create Connection
 
 mysql_connect("devweb2014.cis.strath.ac.uk", "rnb12162", "consista");
 mysql_select_db("rnb12162") or die(mysql_error());
 
-//$userid = $_GET['userid'];
-if (isset($userid)) {
-    $query = "SELECT * FROM users WHERE (userid = '$userid')";
-    $data = mysql_query($query);
-    $var = mysql_num_rows($data);
+//$query = mysql_query("SELECT * FROM forum WHERE title='$title' AND entry='$entry'") or die(mysql_error());
+//$rows = mysql_num_rows($query);
+//if ($rows == 1) {
+    mysql_query("INSERT INTO forum (title, body) VALUES('$title', '$body')")
+    or die(mysql_error()); 
     
-    while ($var > 0) {
-        $row = mysql_fetch_assoc($data);
-        echo $row['userid'];
-        $id = $row['userid'];
-        echo $row['username'];
-        echo "<br>";
-        $var--;
-    }
+//    if (isset($userid)) {
+//    $query = "SELECT * FROM users WHERE (userid = '$userid')";
+//    $data = mysql_query($query);
+//    $var = mysql_num_rows($data);
     
+//    while ($var > 0) {
+//        $row = mysql_fetch_assoc($data);
+//        echo $row['userid'];
+//        $id = $row['userid'];
+//        echo $row['username'];
+//        echo "<br>";
+//        $var--;
+//    } 
+//}
 }
-/*        mysql_connect("devweb2014.cis.strath.ac.uk", "rnb12162", "consista");
- //       $username = $_SESSION['username'];
-        $userid = $_SESSION['userid'];
-        mysql_select_db("rnb12162") or die(mysql_error());
-        $query = "SELECT * FROM users";
-
-        $result = mysql_query($query) or die(mysql_error());
-        if(mysql_num_rows($result) > 0) {
-            $id = mysql_fetch_array($result);
-            echo $id['userid'];
-        } */
-        ?> 
+?> 
 
         
 

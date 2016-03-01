@@ -36,19 +36,22 @@ session_start();
          <br>
          <br>
          <?php if (isset($_SESSION['userid'])) {
-             echo "Welcome ";
-             
+             echo "Welcome";
+             ?>
+            <div id="signOut">
+            <a href="logout.php" class="btn">Log Out</a>
+            </div>
+        <?php     
          }
          else {
              echo "Please sign in";
+             ?>
+            <div id="signIn">
+            <a href="login.html" class="btn">Log In</a>
+            </div>
+         <?php
          }
          ?>
-    <div id="signOut">
-        <a href="logout.php" class="btn">Log Out</a>
-    </div>     
-    <div id="signIn">
-        <a href="login.html" class="btn">Log In</a>
-    </div>
         </section>
         <script src="newIdentity.js"</script>
      <!--           <footer>&copy; 2015 Andrew Mortimer</footer>-->

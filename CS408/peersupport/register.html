@@ -16,33 +16,37 @@
                     name = document.getElementById("name").value,
                     password = document.getElementById("password").value,
                     confirm = document.getElementById("confirm").value;
-                var registerInfo = "{ \"username\" : \"" + username + "\" , \"name\" : \"" + name + "\" , \"password\" : \"" + password + "\"}";
+                            
+            if (username.length === 0) {
+                    console.log("nousername");
+                    window.alert("Please provide a username");
+            //        window.location.href = "register.html";
+                } 
+                else if (name.length === 0) {
+                    console.log("noname");
+                    window.alert("Please provide your name.");
+              //      window.location.href = "register.html";
+                    }
+                else if (password.length < 6) {
+                    console.log("password too short");
+                    window.alert("Password must be at least 6 characters.");
+              //      window.location.href = "register.html";
+                } 
+                else if (password !== confirm) {
+                    console.log("notsamepass");
+                    window.alert("Password does not match confirmation.");
+               //     window.location.href = "register.html";
+                } 
+                
+                else {
+                    console.log("password fine");
+                var registerInfo = "{ \"username\" : \"" + username + "\" , \"name\" : \"" + name + "\" , \"password\" : \"" + password + "\" , \"confirm\" : \"" + confirm + "\"}";
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function() {
-//                if (username.length === 0) {
-//                    console.log("nousername");
-//                    window.alert("must supply a username!");
-//                    window.location.href = "register.html";
-//                } 
-//                else if (name.length === 0) {
-//                    console.log("noname");
-//                    window.alert("must supply name");
-//                    window.location.href = "register.html";
-//                    }
-//                else if (password.length < 6) {
-//                    console.log("password too short, minimum 6 characters");
-//                    window.alert("password too short, minimum 6 characters");
-//                    window.location.href = "register.html";
-//                } 
-//                else if (password !== confirm) {
-//                    console.log("notsamepass");
-//                    window.alert("passwords do not match!");
-//                    window.location.href = "register.html";
-//                } else {
-//                    console.log("password fine");
+
                     if (xhr.readyState === 4) {
                         if (xhr.status === 200) {
-                           window.location.href = "register.html";
+                           window.location.href = "home.php ";
                            console.log(username);
                         }
                         else {
@@ -50,13 +54,12 @@
                             console.log('else');
                         }
                     }
-  //              }
-
                 };
                 console.log('here');
                 xhr.open('post', 'registration.php', true);
                 xhr.send(registerInfo);
             }
+        }
         </script>
         <div class ="home">
             <a href="home.php" class="homeBtn">Home</a>
@@ -68,14 +71,14 @@
         </div>
         <div id="SignUp">
                     <strong>University username:</strong>
-                    <input id="username" type="text"/><br>
+                    <input id="username" type="text" required/><br>
                     <strong>Name:</strong>
-                    <input id="name" type="text"/><br>
+                    <input id="name" type="text" required/><br>
                     <strong>Password:</strong>
-                    <input id="password" type="password"/>
+                    <input id="password" type="password" required/>
                     (minimum 6 characters)<br>
                     <strong>Confirm:</strong>
-                    <input id="confirm" type="password"/><br>
+                    <input id="confirm" type="password" required/><br>
                     <button id="submit" onclick="addNewUser()" >Submit</button>
                     <input type="reset" value="Reset" />
         </div>    

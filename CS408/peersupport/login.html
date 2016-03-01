@@ -21,6 +21,12 @@ and open the template in the editor.
             function login() {
                 var username = document.getElementById('username').value,
                     password = document.getElementById('password').value;
+            
+            if (username === "" || password === "") {
+                alert("Please fill in all fields.");
+            //    return false;
+            }
+            else {
                 var loginInfo = "{ \"username\" : \"" + username + "\" , \"password\" : \"" + password + "\"}";
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function() {
@@ -36,6 +42,7 @@ and open the template in the editor.
                 xhr.open('post', 'login.php', true);
                 xhr.send(loginInfo);
             }
+        }
         </script> 
         <div class ="home">
             <a href="home.php" class="homeBtn">Home</a>
