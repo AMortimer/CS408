@@ -1,16 +1,41 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Forum</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body>
-        <div>TODO write content</div>
+    <body onload="">
+        <div class ="home">
+            <a href="home.php" class="homeBtn">Home</a>
+        </div>
+        <div class="toolbar">
+        <a href="forum.php" class="btn">Forum</a>
+        <a href="chat.html" class="btn">Chat</a>
+        <a href="about.html" class="btn">Help</a>
+        </div>
+        <div class ="register">
+            <a href="register.html" class="btn">Register to help</a>
+        </div>
+        <div id="allEntries">
+            <table id="forum">
+            </table>       
+        </div>
+        <script>
+            function viewPost() {
+                var title = "title";
+                var xhr=new XMLHttpRequest();
+                var forumInfo = "{ \"title\" : \"" + title + "\"}";
+                console.log(forumInfo);
+                    xhr.onreadystatechange=function() {
+			 if (xhr.readyState===4 && xhr.status===200) {
+				document.getElementById("forum").innerHTML=xhr.responseText;
+			    }	
+			};
+			xhr.open("GET","getPost.php",true);
+			xhr.send();
+		}
+        </script>  
     </body>
 </html>
+
+

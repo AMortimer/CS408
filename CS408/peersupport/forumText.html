@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Write Forum Post</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class ="home">
+            <a href="home.php" class="homeBtn">Home</a>
+        </div>
+        <div class="toolbar">
+            <a href="forum.html" class="btn">Forum</a>
+            <a href="chat.html" class="btn">Chat</a>
+            <a href="about.html" class="btn">Help</a>
+        </div>
+        <div class ="register">
+            <a href="register.html" class="btn">Register to help</a>
+        </div>
+        <div id="forum">
+            <strong>Title:</strong>  
+            <input id="title" type="text" size="30">  
+            <strong>Text:</strong>
+            <textarea id="body"></textarea>
+            <button id="submit" onclick="addEntry()">Submit</button>
+            <input class="fButton" type="reset" value="Reset"/>
+        </div>
+        <script>
+/*       function randomNumber() {
+           var randNo = Math.floor(100000 + Math.random() * 900000);
+           if ((randNo%5===0) || (randNo%2===0)) {
+               randomNumber();
+           }
+           else {
+               console.log(randNo);
+               return randNo;
+           }
+       } */
+       function firstID(){
+           var firstId;
+            //   firstId = randomNumber();
+           firstId = Math.floor(100000 + Math.random() * 900000);
+           return firstId;
+       }
+
+       function getOldID(n) {
+            n = firstID();
+            return n;
+       }
+
+       function generateID(n) {
+           var newId;
+           var id;
+           if(n<=1) {
+              newId = getOldID(n); 
+           }
+           else {
+              id = (getOldID(n)*n); 
+              newId=id%1000000;
+           }
+           return newId;
+       }
+        function addEntry(){
+            var title = document.getElementById("title").value,
+                body = document.getElementById("body").value,
+                identity = generateID(1);
+
+            if(title === "" || body === "") {
+                    alert("Please fill in all text fields");
+                    return false;
+                }
+            else {
+                var forumInfo = "{ \"title\" : \"" + title + "\" , \"body\" : \"" + body + "\" , \"identity\" : \"" + identity + "\"}";
+                console.log(forumInfo);
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        window.location.href = "forum.html";
+                    }
+                    else {
+                        console.log(xhr.responseText);
+                    }
+                }
+            };
+
+            xhr.open('post', 'forum.php', true);
+            xhr.send(forumInfo);
+            }
+        }
+        </script>    
+            
+    </body>
+</html>

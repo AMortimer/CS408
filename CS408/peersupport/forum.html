@@ -10,7 +10,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body>
+    <body onload="viewEntries()">
         <div class ="home">
             <a href="home.php" class="homeBtn">Home</a>
         </div>
@@ -22,42 +22,13 @@ and open the template in the editor.
         <div class ="register">
             <a href="register.html" class="btn">Register to help</a>
         </div>
-            <button id="addForum" onclick="generateID(4)">Add new forum</button>
+        <div>
+        <a href="forumText.html"> <button id="addForum">Add new forum </button></a>
+        </div>
         <div id="forum">
-            <strong>Title:</strong>  
-            <input id="title" type="text" size="30">  
-            <strong>Text:</strong>
-            <textarea id="body"></textarea>
-            <button id="submit" onclick="addEntry()">Submit</button>
-            <input class="fButton" type="reset" value="Reset"/>
+            
         </div>
         <script>
-            	function addEntry(){
-		var title = document.getElementById("title").value;
-		var body = document.getElementById("body").value;
-		
-		if(title === "" || entry === "") {
-			alert("Please fill in all text fields");
-			return false;
-                    }
-                else {
-                    var forumInfo = "{ \"title\" : \"" + title + "\" , \"body\" : \"" + body + "\"}";
-                    console.log(forumInfo);
-                    var xhr = new XMLHttpRequest();
-                    xhr.onreadystatechange = function() {
-                    if (xhr.readyState === 4) {
-                        if (xhr.status === 200) {
-                            window.location.href = "forum.html";
-                        }
-                        else {
-                            console.log(xhr.responseText);
-                        }
-                    }
-                };
-                xhr.open('post', 'forum.php', true);
-                xhr.send(forumInfo);
-		}
-            }
 		function viewEntries() {
                     var xhr;
                     
@@ -71,47 +42,60 @@ and open the template in the editor.
 			 if (xhr.readyState===4 && xhr.status===200) {
 				document.getElementById("forum").innerHTML=xhr.responseText;
 			    }	
-			}
-			xhr.open("GET","getPost.php",true);
+			};
+			xhr.open("GET","getEntry.php",true);
 			xhr.send();
-		}       
-/*       function randomNumber() {
-           var randNo = Math.floor(100000 + Math.random() * 900000);
-           if ((randNo%5===0) || (randNo%2===0)) {
-               randomNumber();
-           }
-           else {
-               console.log(randNo);
-               return randNo;
-           }
-       } */
-       function firstID(){
-           var firstId;
-            //   firstId = randomNumber();
-           firstId = Math.floor(100000 + Math.random() * 900000);
-           return firstId;
-       }
-
-       function getOldID(n) {
-            n = firstID();
-            return n;
-       }
-
-       function generateID(n) {
-           var newId;
-           var id;
-           if(n<=1) {
-              newId = getOldID(n); 
-           }
-           else {
-              id = (getOldID(n)*n); 
-              newId=id%1000000;
-           }
-               
-           console.log(n);
-           console.log(newId);
-           return newId;
-       }
+		} 
+                
+///*       function randomNumber() {
+//           var randNo = Math.floor(100000 + Math.random() * 900000);
+//           if ((randNo%5===0) || (randNo%2===0)) {
+//               randomNumber();
+//           }
+//           else {
+//               console.log(randNo);
+//               return randNo;
+//           }
+//       } */
+//       function firstID(){
+//           var firstId;
+//            //   firstId = randomNumber();
+//           firstId = Math.floor(100000 + Math.random() * 900000);
+//           return firstId;
+//       }
+//
+//       function getOldID(n) {
+//            n = firstID();
+//            return n;
+//       }
+//
+//       function generateID(n) {
+//           var newId;
+//           var id;
+//           if(n<=1) {
+//              newId = getOldID(n); 
+//           }
+//           else {
+//              id = (getOldID(n)*n); 
+//              newId=id%1000000;
+//           }
+//           var IDinfo = "{ \"ID\" : \"" + newId + "\"}";
+//           var xhr = new XMLHttpRequest();
+//               xhr.onreadystatechange = function() {
+//                    if (xhr.readyState === 4) {
+//                        if (xhr.status === 200) {
+//                            window.location.href = "forumText.html";
+//                        }
+//                        else {
+//                            console.log(xhr.responseText);
+//                        }
+//                    }
+//                };
+//                console.log(IDinfo);
+//                xhr.open('post', 'forum.php', true);
+//                xhr.send(IDinfo);
+//           return newId;
+//       }
     </script>
     </body>
 </html>

@@ -12,9 +12,12 @@ else {
     ChromePhp::log('session');
     $title = $info['title'];
     $body = $info['body'];
+    $identity = $info['identity'];
+    ChromePhp::log($identity);
     $userid=$_SESSION['userid'];
     ChromePhp::log($userid);
-
+    ?>
+<?php
 //Create Connection
 
 mysql_connect("devweb2014.cis.strath.ac.uk", "rnb12162", "consista");
@@ -23,7 +26,8 @@ mysql_select_db("rnb12162") or die(mysql_error());
 //$query = mysql_query("SELECT * FROM forum WHERE title='$title' AND entry='$entry'") or die(mysql_error());
 //$rows = mysql_num_rows($query);
 //if ($rows == 1) {
-    mysql_query("INSERT INTO forum (title, body) VALUES('$title', '$body')")
+    ChromePhp::log('inserting values');
+    mysql_query("INSERT INTO forum (title, body, userid, identity) VALUES('$title', '$body', '$userid', '$identity')")
     or die(mysql_error()); 
     
 //    if (isset($userid)) {
