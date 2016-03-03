@@ -1,22 +1,43 @@
+<html>
+    <head>
+        <title>Forum</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class ="home">
+            <a href="home.php" class="homeBtn">Home</a>
+        </div>
+        <div class="toolbar">
+        <a href="forum.html" class="btn">Forum</a>
+        <a href="chat.html" class="btn">Chat</a>
+        <a href="about.html" class="btn">Help</a>
+        </div>
+        <div class ="register">
+            <a href="register.html" class="btn">Register to help</a>
+        </div>
+    
 <?php
 include 'ChromePhp.php';
 session_start();
+$postid = $_GET["postid"];
 mysql_connect("devweb2014.cis.strath.ac.uk", "rnb12162", "consista");
 mysql_select_db("rnb12162") or die(mysql_error());
 ChromePhp::log('get post');
-$info = json_decode(file_get_contents('php://input'), true);
-$title = $info['title'];
+
+ChromePhp::log($postid);
 //create an html file and redirect to it 
 
-$query = mysql_query("SELECT * FROM forum WHERE title = '$title'") or die(mysql_error());
+$query = mysql_query("SELECT * FROM forum WHERE postid = '$postid'") or die(mysql_error());
 
 if(mysql_num_rows($query) > 0) {
-    echo "<table id='forum'><tr><th>Date</th><th>Title</th><th>Identity</th><tr>";
+    echo "<table id='forum'><tr><th>Date</th><th>Title</th><th>Body</th><th>Identity</th><tr>";
 
-    while($row = mysql_fetch_array($result)){
+    while($row = mysql_fetch_array($query)){
                     echo "<tr>";
                     echo "<td>" . $row['date']  . "</td>";
-                    echo "<td>" . '<a href="forumPost.html">'.$row['title'] .'</a>'. "</td>";
+                    echo "<td>" . $row['title'] .'</a>'. "</td>";
+                    echo "<td>" . $row['body'];
                     echo "<td>" . $row['identity']	 . "</td>";
                     echo "</tr>";
             }
@@ -58,4 +79,6 @@ if(mysql_num_rows($query) > 0) {
 ////redirect the user to the html page 
 //header("location:$filename"); 
 }
-?>  
+?>
+    </body>
+</html>

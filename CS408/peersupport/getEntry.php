@@ -17,7 +17,7 @@ session_start();
         while($row = mysql_fetch_array($result)){
 			echo "<tr>";
 			echo "<td>" . $row['date']  . "</td>";
-			echo "<td>" . '<a href="forumPost.html">'.$row['title'] .'</a>'. "</td>";
+			echo "<td>" . '<a href="getPost.php?postid=' . $row['postid'] . '">' . $row['title'] . '</a>'. "</td>";
 			echo "<td>" . $row['identity']	 . "</td>";
 			echo "</tr>";
 		}
